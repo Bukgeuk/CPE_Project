@@ -1,0 +1,57 @@
+.main {
+    padding-top: 38px;
+    height: 100vh;
+}
+
+#version {
+    color: #808080;
+}
+
+.center {
+    margin: 0 auto;
+    text-align: center;
+}
+
+.btn-group {
+    margin: 0 auto;
+    width: fit-content;
+}
+
+.btn-group > div {
+    margin-top: 20px;
+    vertical-align: middle;
+    height: 30px;
+    width: fit-content;
+}
+
+.btn-group > div > img {
+    display: inline-block;
+    padding-bottom: 6px;
+}
+
+.btn-group span {
+    font-size: 1rem;
+}
+
+.btn-group span:hover {
+    color: #ba6f25;
+}
+
+header {
+    padding-bottom: 20px;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100vw;
+}
+
+footer > img {
+    margin: 5px 5px 5px 5px;
+    float: right;
+}
+
+.footer-display {
+    display: inline-block;
+}

@@ -1,0 +1,23 @@
+{
+  "name": "cpe_project",
+  "version": "1.0.0",
+  "description": "A Class President Election Program",
+  "main": "app.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bukgeuk/CPE_Project.git"
+  },
+  "author": "Bukgeuk_, Sechack06",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Bukgeuk/CPE_Project/issues"
+  },
+  "homepage": "https://github.com/Bukgeuk/CPE_Project#readme",
+  "dependencies": {
+    "electron": "^10.1.1",
+    "html2canvas": "^1.0.0-rc.7"
+  }
+}
