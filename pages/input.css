@@ -4,18 +4,17 @@ header {
 }
 
 .input {
-    display: block;
+    display: inline-block;
     padding-top: 5px;
     padding-bottom: 5px;
     background-color: #45494a;
     border-color: #646464;
     width: 20vw;
-    float: left;
     margin-top: 3px;
 }
 
-.next { 
-    padding: 3px 20px 3px 20px; 
+.btn {
+    padding: 0.5vh 2vw 0.5vh 2vw; 
 }
 
 #scrollView {
@@ -23,8 +22,46 @@ header {
     padding-left: 10vw;
 }
 
+#scrollView > div {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
 #scrollView > div > span {
-    float: left;
+    display: inline-block;
     margin-right: 15px;
     font-size: 1.6rem;
 }
+
+.footer-display {
+    display: inline-block;
+}
+
+#addBtn {
+    outline: none;
+    width: 20vw;
+    font-size: 1rem;
+}
+
+section {
+    height: calc(89vh - 84px);
+    overflow: auto;
+}
+
+footer {
+    text-align: right;
+    width: 100vw;
+    padding: 0 5px 5px 5px;
+}
+
+section::-webkit-scrollbar {
+    display: none;
+}
+
+/*footer {
+    position: absolute;
+    bottom: 0;
+    text-align: right;
+    width: 100vw;
+    padding: 0 5px 5px 5px;
+}*/

@@ -18,6 +18,11 @@
     src: url('../assets/fonts/NotoSansKR-Medium.otf');
 }
 
+@font-face {
+    font-family: NotoSansKR-Bold;
+    src: url('../assets/fonts/NotoSansKR-Bold.otf');
+}
+
 .light-text {
     font-family: NotoSansKR-Light;
 }
@@ -34,8 +39,13 @@
     font-family: NotoSansKR-Medium;
 }
 
+.bold-text {
+    font-family: NotoSansKR-Bold;
+}
+
 body {
     background-color: #45474a;
+    overflow: hidden;
 }
 
 .text {
@@ -52,4 +62,20 @@ body {
 .center {
     margin: 0 auto;
     text-align: center;
+}
+
+.btn-blue:active, .btn-blue:focus, .btn-gray:active, .btn-gray:focus {
+    outline: none;
+}
+
+.btn-blue {
+    font-size: 0.9rem;
+    background-color: #365880;
+    border-color: #4c708c;
+}
+
+.btn-gray {
+    font-size: 0.9rem;
+    background-color: #4c5052;
+    border-color: #5e6060;
 }
