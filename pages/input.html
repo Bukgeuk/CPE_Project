@@ -8,6 +8,20 @@
         <script type="text/javascript" src="input.js"></script>
     </head>
     <body class="select-none">
-        
+        <header>
+            <div class="light-text text center" style="font-size: 2.4rem;"><span>후보자 등록</span></div>
+        </header>
+        <section>
+            <div id="scrollView">
+                <div>
+                    <label class="text regular-text mb-2 tracking-wide">1.</label>
+                    <input class="w-full focus:outline-none focus:shadow-outline rounded-lg px-3 appearance-none leading-normal input border text light-text" type="text" placeholder="이름 입력" class="inputName">
+                </div>
+            </div>
+        </section>
+        <footer>
+            <button class="text regular-text border rounded next tracking-wide btn-blue" id="next" onclick="clickNext()">다음</button>
+            <button class="text regular-text border rounded tracking-wide btn-gray" id="cancel" onclick="clickCancel()">취소</button>
+        </footer>
     </body>
 </html>

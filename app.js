@@ -55,6 +55,9 @@ ipcMain.on('app', (event, arg) => {
         case 'maximize':
             win.maximize()
             break
+        case 'fullscreen':
+            win.setFullScreen(arg.data)
+            break
     }
 })
 

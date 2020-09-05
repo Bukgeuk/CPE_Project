@@ -48,3 +48,8 @@ body {
     transition-property: opacity;
     transition-duration: 0.2s;
 }
+
+.center {
+    margin: 0 auto;
+    text-align: center;
+}
