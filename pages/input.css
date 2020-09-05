@@ -1,20 +1,30 @@
 header {
-    padding-top: 40px;
-}
-
-.group p {
-    margin-top: 5px;
+    padding-top: 5vh;
+    padding-bottom: 5vh;
 }
 
 .input {
+    display: block;
     padding-top: 5px;
     padding-bottom: 5px;
-    margin-top: 5px;
     background-color: #45494a;
     border-color: #646464;
+    width: 20vw;
+    float: left;
+    margin-top: 3px;
 }
 
 .next { 
     padding: 3px 20px 3px 20px; 
 }
 
+#scrollView {
+    padding-right: 10vw;
+    padding-left: 10vw;
+}
+
+#scrollView > div > span {
+    float: left;
+    margin-right: 15px;
+    font-size: 1.6rem;
+}

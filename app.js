@@ -15,7 +15,7 @@ function createWindow() {
         }
     })
 
-    win.setMenu(null)
+    //win.setMenu(null)
     
     win.loadFile('pages/start.html')
 
@@ -57,6 +57,11 @@ ipcMain.on('app', (event, arg) => {
             break
         case 'fullscreen':
             win.setFullScreen(arg.data)
+            break
+        case 'hangul':
+            win.minimize()
+            win.maximize()
+            win.setFullScreen(true)
             break
     }
 })
