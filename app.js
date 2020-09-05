@@ -1,6 +1,8 @@
-const { app, BrowserWindow, ipcMain, remote } = require('electron')
+const { app, BrowserWindow, ipcMain } = require('electron')
 const path = require('path')
 //const fs = require('fs')
+
+let candidateList = []
 
 function createWindow() {
     let win = new BrowserWindow({
@@ -11,7 +13,8 @@ function createWindow() {
         show: false,
         icon: path.join(__dirname, 'assets', 'icons', 'icon.ico'),
         webPreferences: {
-            nodeIntegration: true
+            nodeIntegration: true,
+            enableRemoteModule: true
         }
     })
 
@@ -42,9 +45,6 @@ ipcMain.on('app', (event, arg) => {
     let win = BrowserWindow.getFocusedWindow()
 
     switch (arg.type) {
-        case 'reload':
-            win.reload()
-            break
         case 'title':
             win.setTitle(arg.data)
             break
@@ -60,10 +60,22 @@ ipcMain.on('app', (event, arg) => {
         case 'fullscreen':
             win.setFullScreen(arg.data)
             break
+        case 'unmaximize':
+            win.unmaximize()
+            break
         case 'hangul':
             win.minimize()
             win.maximize()
             win.setFullScreen(true)
+            break
+        case 'size':
+            win.setSize(arg.data.width, arg.data.height)
+            break
+        case 'getList':
+            candidateList = arg.data
+            break
+        case 'sendList':
+            event.sender.send('sendList', candidateList)
             break
     }
 })

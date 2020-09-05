@@ -2,26 +2,23 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <link rel="stylesheet" href="input.css">
-        <link rel="stylesheet" href="../css/basic.css">
         <link rel="stylesheet" href="../css/tailwind.css">
-        <script type="text/javascript" src="input.js"></script>
+        <link rel="stylesheet" href="../css/basic.css">
+        <link rel="stylesheet" href="../pages/vote.css">
+        <script type="text/javascript" src="vote.js"></script>
     </head>
     <body class="select-none">
         <header>
-            <div class="light-text text center" style="font-size: 2.4rem;"><span>후보자 등록</span></div>
+            <div class="light-text text center" style="font-size: 2.4rem;"><span>투표</span></div>
         </header>
         <section>
             <div id="scrollView">
-
+                
             </div>
         </section>
-        <aside>
-            
-        </aside>
         <footer>
             <button class="text regular-text border rounded btn tracking-wide btn-blue footer-display" id="next" onclick="clickNext()">다음</button>
-            <button class="text regular-text border rounded btn tracking-wide btn-gray footer-display" id="cancel" onclick="clickCancel()">취소</button>
+            <button class="text regular-text border rounded btn tracking-wide btn-gray footer-display" id="cancel" onclick="clickBack()">돌아가기</button>
         </footer>
     </body>
 </html>

@@ -1,9 +1,3 @@
-let candidateList = []
-
-function registerCandidate(name) {
-    candidateList.push({name: name, value: 0}) // 득표수
-}
-
 function sort(arr) {
     arr.sort((a, b) => { 
         if (a.value < b.value)
