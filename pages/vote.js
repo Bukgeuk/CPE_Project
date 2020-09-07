@@ -1,4 +1,18 @@
 const { remote, ipcRenderer } = require('electron')
+window.$ = window.jQuery = require('jquery')
+window.toastr = require('toastr')
+
+toastr.options = {
+    //"escapeHtml" : true,
+    "closeButton" : true,
+    "newestOnTop" : false,
+    "progressBar": true,
+    "timeOut" : 2000,
+    "showDuration": 300,
+    "hideDuration": 1000,
+    "positionClass": "toast-bottom-left",
+}
+
 
 let candidateList = []
 let option = {}
@@ -26,7 +40,7 @@ ipcRenderer.on('data', (event, arg) => {
 ipcRenderer.send('data', ({type: 'listToRenderingProcess'}))
 ipcRenderer.send('data', ({type: 'optionToRenderingProcess'}))
 
-window.onload = function() {
+window.onload = () => {
     document.body.style.opacity = '1'
 
     let target = document.getElementById('scrollView')
@@ -152,6 +166,7 @@ function setVoteCountText() {
 
 function vote(number) {
     if (!canVote) {
+        toastr.info("", "잠시 기다려 주세요")
         // show toast message
 
         return
@@ -168,6 +183,7 @@ function vote(number) {
     
     count++
     setVoteCountText()
+    toastr.success("", "투표되었습니다!")
     // show toast message
 
     if (option.headcount === count) {

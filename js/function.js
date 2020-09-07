@@ -1,3 +1,6 @@
+const https = require("https")
+const fs = require("fs-extra")
+
 function sort(arr) {
     arr.sort((a, b) => { 
         if (a.value < b.value)
@@ -19,4 +22,24 @@ function count(list, name) {
     array.sort()
 
     
+}
+
+function versionCheck(){
+    const url = "https://raw.githubusercontent.com/Bukgeuk/CPE_Project/master/version.json"
+
+    return new Promise((resolve, reject) => {
+        https.get(url, stream => {
+            let rawdata = ''
+            stream.setEncoding('utf8')
+            stream.on('data', buffer => rawdata += buffer)
+            stream.on('end', () => {
+                try {
+                    const obj = JSON.parse(rawdata)
+                    resolve(obj.version)
+                } catch (e) {
+                    reject(e)
+                }
+            })
+        }).on('error', (e) => reject(e))
+    })
 }

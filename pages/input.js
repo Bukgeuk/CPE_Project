@@ -2,6 +2,17 @@ const { remote, ipcRenderer } = require('electron')
 window.$ = window.jQuery = require('jquery')
 window.toastr = require('toastr')
 
+toastr.options = {
+    //"escapeHtml" : true,
+    "closeButton" : true,
+    "newestOnTop" : false,
+    "progressBar": true,
+    "timeOut" : 2000,
+    "showDuration": 300,
+    "hideDuration": 1000,
+    "positionClass": "toast-bottom-left",
+}
+
 let win = remote.getCurrentWindow()
 win.setTitle("학급 정부회장 선거 - 후보자 등록")
 
@@ -336,10 +347,7 @@ function clickNext() {
     }
 
     if (!flag1) {
-        let win = remote.getCurrentWindow()
-
-        toastr.error("test")
-        //remote.dialog.showMessageBox(win, {type: 'error', title: '오류', message: '후보자가 입력되지 않았습니다', detail: '후보자 이름을 입력해주세요'})
+        toastr.error("", "후보자를 입력해 주세요")
 
         return
     }
@@ -353,9 +361,7 @@ function clickNext() {
     let headcount = document.getElementById('inputHeadCount').value
 
     if (!headcount) {
-        let win = remote.getCurrentWindow()
-
-        remote.dialog.showMessageBox(win, {type: 'error', title: '오류', message: '투표자 수가 입력되지 않았습니다', detail: '투표자 수를 입력해주세요'})
+        toastr.error("", "투표자 수를 입력해 주세요")
 
         return
     }
