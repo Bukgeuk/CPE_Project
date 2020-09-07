@@ -1,8 +1,12 @@
 const { remote, ipcRenderer } = require('electron')
+window.$ = window.jQuery = require('jquery')
+window.toastr = require('toastr')
 
-ipcRenderer.send('app', {type: "title", data: "학급 정부회장 선거 - 후보자 등록"})
-ipcRenderer.send('app', {type: "resizeable", data: true})
-ipcRenderer.send('app', {type: "hangul"})
+let win = remote.getCurrentWindow()
+win.setTitle("학급 정부회장 선거 - 후보자 등록")
+
+//ipcRenderer.send('app', {type: "title", data: "학급 정부회장 선거 - 후보자 등록"})
+//ipcRenderer.send('app', {type: "resizeable", data: true})
 
 let isFocusedInput = false
 let next = 6
@@ -12,10 +16,41 @@ let mouseOutEventHandlers = []
 let clickEventHandlers = []
 let focusEventHandlers = []
 let blurEventHandlers = []
+let option = {}
 
-document.addEventListener('keypress', function(e){
+ipcRenderer.on('data', (event, arg) => {
+    switch(arg.type) {
+        case 'list':
+            candidateList = arg.data
+            break
+        case 'option':
+            option = arg.data
+            break
+    }
+})
+
+if (getQueryString().from === 'start') {
+    win.setResizable(true)
+    win.blur()
+    win.focus()
+    //win.maximize()
+    win.setFullScreen(true)
+    //ipcRenderer.send('app', {type: "hangul"})
+}
+
+ipcRenderer.send('data', {type: 'listToRenderingProcess'})
+ipcRenderer.send('data', {type: 'optionToRenderingProcess'})
+
+document.addEventListener('keypress', (e) => {
     if (e.key === '+' && !isFocusedInput)
         addInput()
+    else if (e.key === '-' && !isFocusedInput)
+        deleteInput(next - 2)
+})
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Delete')
+        deleteInput(next - 2)
 })
 
 window.onload = function() {
@@ -89,7 +124,7 @@ window.onload = function() {
         </div>`*/
     }
 
-    {
+    { // Add Button
         let div = document.createElement('div')
         div.id = "addInputDiv"
     
@@ -99,10 +134,31 @@ window.onload = function() {
         span.innerText = `${next}번`
     
         let button = document.createElement('button')
-        button.classList.add('text', 'tracking-wide', 'bold-text', 'bg-transparent', 'hover:bg-blue-500', 'text-blue-500', 'font-semibold', 'hover:text-white', 'py-2', 'px-4', 'border', 'border-blue-500', 'hover:border-transparent', 'rounded')
+        button.classList.add('tracking-wide', 'bold-text', 'bg-transparent', 'hover:bg-blue-500', 'text-blue-500', 'font-semibold', 'hover:text-white', 'py-2', 'px-4', 'border', 'border-blue-500', 'hover:border-transparent', 'rounded')
         button.addEventListener('click', addInput)
         button.id = "addInput"
         button.innerText = "추가"
+    
+        div.appendChild(span)
+        div.appendChild(button)
+    
+        target.appendChild(div)
+    }
+
+    { // Delete Button
+        let div = document.createElement('div')
+        div.id = "deleteInputDiv"
+    
+        let span = document.createElement('span')
+        span.classList.add('medium-text', 'text')
+        span.style.visibility = 'hidden'
+        span.innerText = `${next}번`
+    
+        let button = document.createElement('button')
+        button.classList.add('tracking-wide', 'bold-text', 'bg-transparent', 'hover:bg-red-500', 'text-red-500', 'font-semibold', 'hover:text-white', 'py-2', 'px-4', 'border', 'border-red-500', 'hover:border-transparent', 'rounded')
+        button.addEventListener('click', () => { deleteInput(next - 2) })
+        button.id = "deleteInput"
+        button.innerText = "삭제"
     
         div.appendChild(span)
         div.appendChild(button)
@@ -115,12 +171,31 @@ window.onload = function() {
         <span class="medium-text text" style="visibility: hidden;">${next}번</span>
         <button class="text tracking-wide bold-text bg-transparent hover:bg-blue-500 text-blue-500 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded" onclick="addInput()" id="addInput">추가</button>
     </div>`*/
+
+    if (Object.keys(option).length !== 0) {
+        document.getElementById('inputHeadCount').value = option.headcount
+        document.getElementById('useAbstain').checked = option.useAbstain
+
+        if (option.votingMethod === 'mouse')
+            document.getElementById('mouseRadio').checked = true
+        else if (option.votingMethod === 'keyboard')
+            document.getElementById('keyboardRadio').checked = true
+    }
+
+    if (candidateList.length > 0) {
+        for (let i = 0; i < candidateList.length; i++) {
+            if (i > 4)
+                addInput()
+            document.getElementById(`inputName${i}`).value = candidateList[i].name
+        }
+    }
 }
 
 function addInput() {
     let target = document.getElementById('scrollView')
     
     document.getElementById('addInputDiv').remove()
+    document.getElementById('deleteInputDiv').remove()
 
     {
         const argValue = next - 1
@@ -198,10 +273,31 @@ function addInput() {
         span.innerText = `${next}번`
     
         let button = document.createElement('button')
-        button.classList.add('text', 'tracking-wide', 'bold-text', 'bg-transparent', 'hover:bg-blue-500', 'text-blue-500', 'font-semibold', 'hover:text-white', 'py-2', 'px-4', 'border', 'border-blue-500', 'hover:border-transparent', 'rounded')
+        button.classList.add('tracking-wide', 'bold-text', 'bg-transparent', 'hover:bg-blue-500', 'text-blue-500', 'font-semibold', 'hover:text-white', 'py-2', 'px-4', 'border', 'border-blue-500', 'hover:border-transparent', 'rounded')
         button.addEventListener('click', addInput)
         button.id = "addInput"
         button.innerText = "추가"
+    
+        div.appendChild(span)
+        div.appendChild(button)
+    
+        target.appendChild(div)
+    }
+
+    { // Delete Button
+        let div = document.createElement('div')
+        div.id = "deleteInputDiv"
+    
+        let span = document.createElement('span')
+        span.classList.add('medium-text', 'text')
+        span.style.visibility = 'hidden'
+        span.innerText = `${next}번`
+    
+        let button = document.createElement('button')
+        button.classList.add('tracking-wide', 'bold-text', 'bg-transparent', 'hover:bg-red-500', 'text-red-500', 'font-semibold', 'hover:text-white', 'py-2', 'px-4', 'border', 'border-red-500', 'hover:border-transparent', 'rounded')
+        button.addEventListener('click', () => { deleteInput(next - 2) })
+        button.id = "deleteInput"
+        button.innerText = "삭제"
     
         div.appendChild(span)
         div.appendChild(button)
@@ -225,6 +321,8 @@ function clickNext() {
     let flag1 = false
     let flag2 = false
 
+    candidateList = []
+
     for (let i = 0; i < next - 1; i++) {
         let name = document.getElementById(`inputName${i}`).value
 
@@ -240,7 +338,8 @@ function clickNext() {
     if (!flag1) {
         let win = remote.getCurrentWindow()
 
-        remote.dialog.showMessageBox(win, {type: 'error', title: '오류', message: '후보자가 입력되지 않았습니다', detail: '후보자 이름을 입력해주세요'})
+        toastr.error("test")
+        //remote.dialog.showMessageBox(win, {type: 'error', title: '오류', message: '후보자가 입력되지 않았습니다', detail: '후보자 이름을 입력해주세요'})
 
         return
     }
@@ -251,10 +350,28 @@ function clickNext() {
         remote.dialog.showMessageBoxSync(win, {type: 'warning', title: '경고', message: '중간에 입력되지 않은 번호가 있습니다', detail: '자동으로 앞으로 당겨져서 기입됩니다'})
     }
 
-    ipcRenderer.send('app', {type: 'getList', data: candidateList})
+    let headcount = document.getElementById('inputHeadCount').value
+
+    if (!headcount) {
+        let win = remote.getCurrentWindow()
+
+        remote.dialog.showMessageBox(win, {type: 'error', title: '오류', message: '투표자 수가 입력되지 않았습니다', detail: '투표자 수를 입력해주세요'})
+
+        return
+    }
+
+    option.headcount = parseInt(headcount)
+    option.useAbstain = document.getElementById('useAbstain').checked
+    option.votingMethod = getVotingMethod()
+
+    ipcRenderer.send('data', {type: 'listToMainProcess', data: candidateList})
+    ipcRenderer.send('data', {type: 'optionToMainProcess', data: option})
+
+    win = remote.getCurrentWindow()
 
     setTimeout(() => {
-        ipcRenderer.send('app', ({type: 'title', data: '학급 정부회장 선거 - 투표'}))
+        win.setTitle("학급 정부회장 선거 - 투표")
+        //ipcRenderer.send('app', ({type: 'title', data: '학급 정부회장 선거 - 투표'}))
         location.href = './vote.html'
     }, 200)
 
@@ -262,16 +379,35 @@ function clickNext() {
 }
 
 function clickCancel() {
+    ipcRenderer.send('data', {type: 'listToMainProcess', data: []})
+    ipcRenderer.send('data', {type: 'optionToMainProcess', data: {}})
+
+    win = remote.getCurrentWindow()
+
     setTimeout(() => {
-        ipcRenderer.send('app', ({type: 'title', data: '학급 정부회장 선거'}))
+        win.setTitle("학급 정부회장 선거")
+        win.setSize(480, 490)
+        win.setFullScreen(false)
+        //win.unmaximize()
+        win.setResizable(false)
+        /*ipcRenderer.send('app', ({type: 'title', data: '학급 정부회장 선거'}))
         ipcRenderer.send('app', {type: "size", data: {width: 480, height: 490}})
         ipcRenderer.send('app', {type: "fullscreen", data: false})
         ipcRenderer.send('app', {type: "unmaximize"})
-        ipcRenderer.send('app', {type: "resizeable", data: false})
+        ipcRenderer.send('app', {type: "resizeable", data: false})*/
         location.href = './start.html'
     }, 200)
 
     document.body.style.opacity = '0'
+}
+
+function getVotingMethod() {
+    let mouse = document.getElementById('mouseRadio').checked
+    let keyboard = document.getElementById('keyboardRadio').checked
+
+    if (mouse && !keyboard) return 'mouse'
+    else if (!mouse && keyboard) return 'keyboard'
+    else return 'error'
 }
 
 function onMouseOver(number) {
@@ -283,6 +419,8 @@ function onMouseOut(number) {
 }
 
 function deleteInput(number) {
+    if (number === -1) return
+
     document.getElementById(`inputName${number}`).parentElement.remove()
 
     next--
@@ -341,8 +479,31 @@ function deleteInput(number) {
     }
 
     document.getElementById('addInputDiv').firstElementChild.innerText = `${next - 1}번`
+    document.getElementById('deleteInputDiv').firstElementChild.innerText = `${next - 1}번`
 
     mouseOverEventHandlers.pop()
     mouseOutEventHandlers.pop()
     clickEventHandlers.pop()
+}
+
+function getQueryString(){
+    let result = {}
+    let arguments = window.location.href.indexOf('?')
+
+    if (arguments === -1) return null
+
+    let arr = window.location.href.substr(arguments + 1).split('&');
+
+    for(let i = 0; i < arr.length; i++){
+        let temp = arr[i].split('=');
+        result[temp[0]] = temp[1]
+    }
+
+    return result;
+}
+
+function checkNum(e) {
+    let keyVal = e.keyCode
+
+    return (keyVal >= 48 && keyVal <= 57)
 }

@@ -17,14 +17,32 @@ header {
     padding-bottom: 20px;
 }
 
-#scrollView > div > span {
+#scrollView > div > div {
+    width: 300px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+#scrollView > div > div > span {
     display: inline-block;
     margin-right: 15px;
     font-size: 1.6rem;
 }
 
-#scrollView > div > p {
+#scrollView > div > div > p {
     display: inline-block;
+    font-size: 1.6rem;
+}
+
+#scrollView > div > button {
+    outline: none;
+    width: 150px;
+    margin-left: 50px;
+}
+
+#scrollView > div > span {
+    display: inline-block;
+    margin-left: 50px;
     font-size: 1.6rem;
 }
 
@@ -45,4 +63,14 @@ footer {
 
 section::-webkit-scrollbar {
     display: none;
+}
+
+aside {
+    position: absolute;
+    top: calc(10vh + 57px + 20px);
+    right: 12vw;
+}
+
+aside > p {
+    font-size: 1.2rem;
 }

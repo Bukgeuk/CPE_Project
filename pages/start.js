@@ -10,7 +10,7 @@ function openGitHub() {
 
 function clickNext() {
     setTimeout(() => {
-        location.href = './input.html'
+        location.href = './input.html?from=start'
     }, 200)
 
     document.body.style.opacity = '0'

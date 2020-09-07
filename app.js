@@ -3,6 +3,7 @@ const path = require('path')
 //const fs = require('fs')
 
 let candidateList = []
+let option = {}
 
 function createWindow() {
     let win = new BrowserWindow({
@@ -42,40 +43,32 @@ app.on('activate', () => {
 })
 
 ipcMain.on('app', (event, arg) => {
-    let win = BrowserWindow.getFocusedWindow()
-
     switch (arg.type) {
-        case 'title':
-            win.setTitle(arg.data)
-            break
         case 'quit':
             app.quit()
-            break
-        case 'resizeable':
-            win.setResizable(arg.data)
-            break
-        case 'maximize':
-            win.maximize()
-            break
-        case 'fullscreen':
-            win.setFullScreen(arg.data)
-            break
-        case 'unmaximize':
-            win.unmaximize()
-            break
-        case 'hangul':
-            win.minimize()
-            win.maximize()
-            win.setFullScreen(true)
-            break
-        case 'size':
-            win.setSize(arg.data.width, arg.data.height)
             break
         case 'getList':
             candidateList = arg.data
             break
         case 'sendList':
             event.sender.send('sendList', candidateList)
+            break
+    }
+})
+
+ipcMain.on('data', (event, arg) => {
+    switch (arg.type) {
+        case 'listToMainProcess':
+            candidateList = arg.data
+            break
+        case 'listToRenderingProcess':
+            event.sender.send('data', {type: 'list', data: candidateList})
+            break
+        case 'optionToMainProcess':
+            option = arg.data
+            break
+        case 'optionToRenderingProcess':
+            event.sender.send('data', {type: 'option', data: option})
             break
     }
 })

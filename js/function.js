@@ -20,9 +20,3 @@ function count(list, name) {
 
     
 }
-
-function vote(name){
-    candidateList.forEach((item) => {
-        if (item.name === name) item.value++
-    })
-}

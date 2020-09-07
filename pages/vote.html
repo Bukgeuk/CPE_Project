@@ -9,16 +9,19 @@
     </head>
     <body class="select-none">
         <header>
-            <div class="light-text text center" style="font-size: 2.4rem;"><span>투표</span></div>
+            <div class="medium-text text center" style="font-size: 2.4rem;"><span>투표</span></div>
         </header>
         <section>
             <div id="scrollView">
-                
+
             </div>
         </section>
+        <aside>
+            <p class="text light-text" id="voteCount">남은 투표자 : 0명</p>
+        </aside>
         <footer>
-            <button class="text regular-text border rounded btn tracking-wide btn-blue footer-display" id="next" onclick="clickNext()">다음</button>
-            <button class="text regular-text border rounded btn tracking-wide btn-gray footer-display" id="cancel" onclick="clickBack()">돌아가기</button>
+            <button class="text regular-text border rounded btn tracking-wide btn-blue footer-display cursor-not-allowed opacity-50" id="next">개표하기</button>
+            <button class="text regular-text border rounded btn tracking-wide btn-gray footer-display" id="back" onclick="clickBack()">돌아가기</button>
         </footer>
     </body>
 </html>
