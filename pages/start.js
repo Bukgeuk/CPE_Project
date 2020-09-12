@@ -13,6 +13,9 @@ ipcRenderer.on('data', (event, arg) => {
 ipcRenderer.send('data', {type: 'updateToRendererProcess'})
 
 window.onload = () => {
+    let win = remote.getCurrentWindow()
+    win.setResizable(false)
+
     document.body.style.opacity = '1'
 
     const version = getCurrentVersion()

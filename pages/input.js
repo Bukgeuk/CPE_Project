@@ -395,7 +395,6 @@ function clickCancel() {
         win.setSize(480, 490)
         win.setFullScreen(false)
         //win.unmaximize()
-        win.setResizable(false)
         /*ipcRenderer.send('app', ({type: 'title', data: '학급 정부회장 선거'}))
         ipcRenderer.send('app', {type: "size", data: {width: 480, height: 490}})
         ipcRenderer.send('app', {type: "fullscreen", data: false})

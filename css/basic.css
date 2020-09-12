@@ -46,17 +46,14 @@
 body {
     background-color: #45474a;
     overflow: hidden;
-}
-
-.text {
-    color: #bbbbbb;
-}
-
-body {
     opacity: 0;
     transition-timing-function: ease;
     transition-property: opacity;
     transition-duration: 0.2s;
+}
+
+.text {
+    color: #bbbbbb;
 }
 
 .center {
