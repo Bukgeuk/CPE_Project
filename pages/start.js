@@ -1,6 +1,16 @@
-const { ipcRenderer, shell } = require('electron')
+const { shell, remote, ipcRenderer } = require('electron')
 const fs = require('fs-extra')
 const https = require('https')
+
+let bHaveToUpdate = undefined
+
+ipcRenderer.on('data', (event, arg) => {
+    if (arg.type === 'update') {
+        bHaveToUpdate = arg.data
+    }
+})
+
+ipcRenderer.send('data', {type: 'updateToRendererProcess'})
 
 window.onload = () => {
     document.body.style.opacity = '1'
@@ -10,15 +20,25 @@ window.onload = () => {
 
     let update = document.getElementById('update')
 
-    getLastestVersion().then(lastestVersion => {
-        if (haveToUpdate(version, lastestVersion)) {
-            update.src = '../assets/icons/update.png'
-        } else {
-            update.src = '../assets/icons/updated.png'
-        }
-    }).catch(err => {
-        update.src = '../assets/icons/fail.png'
-    })
+    if (bHaveToUpdate === undefined) {
+        getLastestVersion().then(lastestVersion => {
+            bHaveToUpdate = haveToUpdate(version, lastestVersion)
+
+            if (bHaveToUpdate) {
+                update.src = '../assets/icons/update.png'
+            } else {
+                update.src = '../assets/icons/updated.png'
+            }
+
+            ipcRenderer.send('data', {type: 'updateToMainProcess', data: bHaveToUpdate})
+        }).catch(err => {
+            update.src = '../assets/icons/fail.png'
+        })
+    } else if (bHaveToUpdate === true) {
+        update.src = '../assets/icons/update.png'
+    } else if (bHaveToUpdate === false) {
+        update.src = '../assets/icons/updated.png'
+    }
 }
 
 function openGitHub() {
@@ -34,7 +54,7 @@ function clickNext() {
 }
 
 function clickExit() {
-    ipcRenderer.send('app', {type: "quit"})
+    remote.app.quit()
 }
 
 function getLastestVersion(){
@@ -76,8 +96,8 @@ function haveToUpdate(current, lastest){
     const lastestArr = lastest.split('.')
 
     for (let i = 0; i < 3; i++) {
-        if (Number(currentArr[i]) < Number(lastestArr[i])) return true
-        else if (Number(currentArr[i]) > Number(lastestArr[i])) return false
+        if (parseInt(currentArr[i]) < parseInt(lastestArr[i])) return true
+        else if (parseInt(currentArr[i]) > parseInt(lastestArr[i])) return false
     }
 
     if (beta) return true

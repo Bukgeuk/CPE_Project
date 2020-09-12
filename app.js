@@ -1,9 +1,10 @@
 const { app, BrowserWindow, ipcMain } = require('electron')
 const path = require('path')
-//const fs = require('fs')
+//const fs = require('fs-extra')
 
 let candidateList = []
 let option = {}
+let haveToUpdate = undefined
 
 function createWindow() {
     let win = new BrowserWindow({
@@ -42,34 +43,27 @@ app.on('activate', () => {
     }
 })
 
-ipcMain.on('app', (event, arg) => {
-    switch (arg.type) {
-        case 'quit':
-            app.quit()
-            break
-        case 'getList':
-            candidateList = arg.data
-            break
-        case 'sendList':
-            event.sender.send('sendList', candidateList)
-            break
-    }
-})
-
 ipcMain.on('data', (event, arg) => {
     switch (arg.type) {
         case 'listToMainProcess':
             candidateList = arg.data
             break
-        case 'listToRenderingProcess':
+        case 'listToRendererProcess':
             event.sender.send('data', {type: 'list', data: candidateList})
             break
         case 'optionToMainProcess':
             option = arg.data
             break
-        case 'optionToRenderingProcess':
+        case 'optionToRendererProcess':
             event.sender.send('data', {type: 'option', data: option})
             break
+        case 'updateToMainProcess':
+            haveToUpdate = arg.data
+            break
+        case 'updateToRendererProcess':
+            event.sender.send('data', {type: 'update', data: haveToUpdate})
+            break
+
     }
 })
 

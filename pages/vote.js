@@ -13,7 +13,6 @@ toastr.options = {
     "positionClass": "toast-bottom-left",
 }
 
-
 let candidateList = []
 let option = {}
 let count = 0
@@ -37,8 +36,8 @@ ipcRenderer.on('data', (event, arg) => {
     }
 })
 
-ipcRenderer.send('data', ({type: 'listToRenderingProcess'}))
-ipcRenderer.send('data', ({type: 'optionToRenderingProcess'}))
+ipcRenderer.send('data', {type: 'listToRendererProcess'})
+ipcRenderer.send('data', {type: 'optionToRendererProcess'})
 
 window.onload = () => {
     document.body.style.opacity = '1'
@@ -147,11 +146,10 @@ function clickBack() {
 }
 
 function clickNext() {
+    ipcRenderer.send('data', ({type: 'listToMainProcess', data: candidateList}))
+
     let win = remote.getCurrentWindow()
     win.setTitle("학급 정부회장 선거 - 개표")
-    win.setFullScreen(false)
-    win.maximize()
-    win.setResizable(false)
 
     setTimeout(() => {
         location.href = './count.html'

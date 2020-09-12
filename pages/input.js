@@ -49,8 +49,8 @@ if (getQueryString().from === 'start') {
     //ipcRenderer.send('app', {type: "hangul"})
 }
 
-ipcRenderer.send('data', {type: 'listToRenderingProcess'})
-ipcRenderer.send('data', {type: 'optionToRenderingProcess'})
+ipcRenderer.send('data', {type: 'listToRendererProcess'})
+ipcRenderer.send('data', {type: 'optionToRendererProcess'})
 
 document.addEventListener('keypress', (e) => {
     if (e.key === '+' && !isFocusedInput)
@@ -360,7 +360,7 @@ function clickNext() {
 
     let headcount = document.getElementById('inputHeadCount').value
 
-    if (!headcount) {
+    if (!headcount || parseInt(headcount) === 0) {
         toastr.error("", "투표자 수를 입력해 주세요")
 
         return

@@ -1,5 +1,16 @@
-header {
+body > header {
     padding-top: 5vh;
+    padding-bottom: 5vh;
+}
+
+article > p {
+    font-size: 1.8rem;
+    padding-top: 2vh;
+    padding-bottom: 4vh;
+}
+
+#ranking {
+    padding-top: 2vh;
     padding-bottom: 5vh;
 }
 
@@ -7,18 +18,22 @@ header {
     padding: 0.5vh 2vw 0.5vh 2vw;
 }
 
-#scrollView {
+#scrollView, #ranking {
     width: fit-content;
     margin: 0 auto;
 }
 
-#scrollView > div {
+#scrollView > div, #ranking > div {
     padding-top: 20px;
     padding-bottom: 20px;
 }
 
+#ranking > div > div {
+    width: fit-content;
+}
+
 #scrollView > div > div {
-    width: 300px;
+    width: 200px;
     white-space: nowrap;
     text-overflow: ellipsis;
 }
@@ -32,6 +47,17 @@ header {
 #scrollView > div > div > p {
     display: inline-block;
     font-size: 1.6rem;
+}
+
+#ranking > div > p {
+    display: inline-block;
+    font-size: 1.8rem;
+}
+
+#ranking > div > span {
+    display: inline-block;
+    margin-right: 50px;
+    font-size: 1.8rem;
 }
 
 #scrollView > div > span {
