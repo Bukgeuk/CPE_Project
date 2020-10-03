@@ -1,5 +1,5 @@
 /node_modules
 /.vscode
 /dist
-css/tailwind.css
-css/toastr.min.css
+tailwind.css
+toastr.css
