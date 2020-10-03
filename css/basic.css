@@ -1,0 +1,78 @@
+@font-face {
+    font-family: NotoSansKR-Light;
+    src: url('../assets/fonts/NotoSansKR-Light.otf');
+}
+
+@font-face {
+    font-family: NotoSansKR-Thin;
+    src: url('../assets/fonts/NotoSansKR-Thin.otf');
+}
+
+@font-face {
+    font-family: NotoSansKR-Regular;
+    src: url('../assets/fonts/NotoSansKR-Regular.otf');
+}
+
+@font-face {
+    font-family: NotoSansKR-Medium;
+    src: url('../assets/fonts/NotoSansKR-Medium.otf');
+}
+
+@font-face {
+    font-family: NotoSansKR-Bold;
+    src: url('../assets/fonts/NotoSansKR-Bold.otf');
+}
+
+.light-text {
+    font-family: NotoSansKR-Light;
+}
+
+.thin-text {
+    font-family: NotoSansKR-Thin;
+}
+
+.regular-text {
+    font-family: NotoSansKR-Regular;
+}
+
+.medium-text {
+    font-family: NotoSansKR-Medium;
+}
+
+.bold-text {
+    font-family: NotoSansKR-Bold;
+}
+
+body {
+    background-color: #45474a;
+    overflow: hidden;
+    opacity: 0;
+    transition-timing-function: ease;
+    transition-property: opacity;
+    transition-duration: 0.2s;
+}
+
+.text {
+    color: #bbbbbb;
+}
+
+.center {
+    margin: 0 auto;
+    text-align: center;
+}
+
+.btn-blue:active, .btn-blue:focus, .btn-gray:active, .btn-gray:focus {
+    outline: none;
+}
+
+.btn-blue {
+    font-size: 0.9rem;
+    background-color: #365880;
+    border-color: #4c708c;
+}
+
+.btn-gray {
+    font-size: 0.9rem;
+    background-color: #4c5052;
+    border-color: #5e6060;
+}

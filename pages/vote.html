@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="../css/tailwind.css">
+        <link rel="stylesheet" href="../css/basic.css">
+        <link rel="stylesheet" href="../pages/vote.css">
+        <script type="text/javascript" src="vote.js"></script>
+        <link rel="stylesheet" href="../css/toastr.min.css">
+    </head>
+    <body class="select-none">
+        <header>
+            <div class="medium-text text center" style="font-size: 2.4rem;"><span>투표</span></div>
+        </header>
+        <section>
+            <div id="scrollView">
+
+            </div>
+        </section>
+        <aside>
+            <p class="text light-text" id="voteCount">남은 투표자 : 0명</p>
+        </aside>
+        <footer>
+            <button class="text regular-text border rounded btn tracking-wide btn-blue footer-display cursor-not-allowed opacity-50" id="next">개표하기</button>
+            <button class="text regular-text border rounded btn tracking-wide btn-gray footer-display" id="back" onclick="clickBack()">돌아가기</button>
+        </footer>
+    </body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="result.css">
+        <link rel="stylesheet" href="../css/basic.css">
+        <link rel="stylesheet" href="../css/tailwind.css">
+        <link rel="stylesheet" href="../css/toastr.min.css">
+        <script type="text/javascript" src="result.js"></script>
+    </head>
+    <body class="select-none">
+        <header>
+            <div class="medium-text text center" style="font-size: 2.4rem;"><span>결과</span></div>
+        </header>
+        <section>
+            <header id="ranking">
+                <div>
+                    <span class="text bold-text">1위</span>
+                    <p class="text medium-text" id="1stPlace">-</p>
+                </div>
+                <div>
+                    <span class="text bold-text">2위</span>
+                    <p class="text medium-text" id="2ndPlace">-</p>
+                </div>
+            </header>
+            <article>
+                <div id="scrollView">
+                    <p class="text medium-text center">득표 현황</p>
+                </div>
+            </article>
+        </section>
+        <footer>
+            <button class="text regular-text border rounded btn tracking-wide btn-blue footer-display" id="copy" onclick="clickCopy()">복사</button>
+            <button class="text regular-text border rounded btn tracking-wide btn-blue footer-display" id="save" onclick="clickSave()">저장</button>
+            <button class="text regular-text border rounded btn tracking-wide btn-blue footer-display" id="next" onclick="clickNext()">완료</button>
+        </footer>
+    </body>
+</html>

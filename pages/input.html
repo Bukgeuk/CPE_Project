@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="input.css">
+        <link rel="stylesheet" href="../css/basic.css">
+        <link rel="stylesheet" href="../css/tailwind.css">
+        <script type="text/javascript" src="../js/function.js"></script>
+        <script type="text/javascript" src="input.js"></script>
+        <link rel="stylesheet" href="../css/toastr.min.css">
+    </head>
+    <body class="select-none">
+        <header>
+            <div class="medium-text text center" style="font-size: 2.4rem;"><span>후보자 등록</span></div>
+        </header>
+        <section>
+            <div id="scrollView">
+
+            </div>
+        </section>
+        <aside class="rounded-lg" oncopy="return false" oncut="return false" onpaste="return false">
+            <p class="text medium-text">설정</p>
+            <div id="headcount">
+                <span class="text light-text">투표자</span>
+                <input class="focus:outline-none focus:shadow-outline rounded-lg px-3 appearance-none leading-normal input border text light-text" type="text" id="inputHeadCount" value="20" onKeyPress="return checkNum(event)">
+                <span class="text light-text">명</span>
+            </div>
+            <div>
+                <input type="checkbox" name="useAbstain" id="useAbstain"><label class="text light-text">기권 사용</label>
+            </div>
+            <div id="votingmethod">
+                <p class="text light-text">투표 방법</p>
+                <input type="radio" name="votingMethod" id="mouseRadio" checked><label class="text light-text">마우스</label>
+                <input type="radio" name="votingMethod" id="keyboardRadio"><label class="text light-text">키보드</label>
+                <div>
+                    <p class="light-text text-red-500">* 마우스로 투표를 진행할 때에는 TV를 꺼야 합니다</p>
+                    <p class="light-text text-red-500">* 키보드 투표는 후보자가 35명 이하일 때만 가능합니다</p>
+                </div>
+            </div>
+        </aside>
+        <footer>
+            <button class="text regular-text border rounded btn tracking-wide btn-blue footer-display" id="next" onclick="clickNext()">투표하기</button>
+            <button class="text regular-text border rounded btn tracking-wide btn-gray footer-display" id="cancel" onclick="clickCancel()">&nbsp;&nbsp;&nbsp;취소&nbsp;&nbsp;&nbsp;</button>
+        </footer>
+    </body>
+</html>

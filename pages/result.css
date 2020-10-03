@@ -1,0 +1,85 @@
+body > header {
+    padding-top: 5vh;
+    padding-bottom: 5vh;
+}
+
+#scrollView > p {
+    font-size: 1.8rem;
+    padding-top: 40px;
+    padding-bottom: 70px;
+}
+
+#ranking {
+    padding-top: 2vh;
+    padding-bottom: 5vh;
+}
+
+.btn {
+    padding: 0.5vh 2vw 0.5vh 2vw;
+}
+
+#scrollView, #ranking {
+    width: fit-content;
+    margin: 0 auto;
+}
+
+#scrollView {
+    padding-bottom: 40px;
+}
+
+#scrollView > div, #ranking > div {
+    padding: 20px 50px 20px 50px;
+}
+
+#ranking > div > div {
+    width: fit-content;
+}
+
+#scrollView > div > div {
+    width: 200px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+#scrollView > div > div > span {
+    display: inline-block;
+    margin-right: 15px;
+    font-size: 1.6rem;
+}
+
+#scrollView > div > div > p {
+    display: inline-block;
+    font-size: 1.6rem;
+}
+
+#ranking > div > p {
+    display: inline-block;
+    font-size: 1.8rem;
+}
+
+#ranking > div > span {
+    display: inline-block;
+    margin-right: 50px;
+    font-size: 1.8rem;
+}
+
+#scrollView > div > span {
+    display: inline-block;
+    margin-left: 50px;
+    font-size: 1.6rem;
+}
+
+footer {
+    text-align: right;
+    width: 100vw;
+    padding: 0 5px 5px 5px;
+}
+
+section::-webkit-scrollbar {
+    display: none;
+}
+
+section {
+    height: calc(89vh - 89px);
+    overflow: auto;
+}
