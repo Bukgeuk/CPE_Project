@@ -86,6 +86,7 @@ function clickCopy() { // 복사
         backgroundColor: "#45474a"
     }).then(canvas => {
         clipboard.writeImage(nativeImage.createFromDataURL(canvas.toDataURL("image/png")))
+        toastr.info("", "복사되었습니다!")
     })
 }
 
@@ -94,7 +95,7 @@ function clickSave() { // 저장
         backgroundColor: "#45474a"
     }).then(canvas => {
         const path = remote.dialog.showSaveDialogSync(remote.getCurrentWindow(), {
-            title: "저장",
+            title: "이미지로 저장",
             filters: [
                 {name: 'PNG 파일', extensions: ['png']},
                 {name: 'JPEG 파일', extensions: ['jpeg']}

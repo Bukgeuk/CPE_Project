@@ -65,6 +65,11 @@ async function count(list, name) {
     pointArr = Array.from(new Set(pointArr))
     pointArr.sort((a, b) => a - b)
 
+    let audio = new Audio()
+    audio.src = "../assets/audios/test.wav"
+                
+    let flag = true
+
     for (let i = 0; i < pointArr[pointArr.length - 1] + 1; i++) {
         if (i === (pointArr[pointIdx] + 1)) {
             for (let j = 0; j < candidateList.length; j++) {
@@ -86,12 +91,11 @@ async function count(list, name) {
                 if (!isSurvive[j]) continue
 
                 document.getElementById(`voteSpan${j}`).innerText = `${i}표`
-
-                /*let audio = new Audio()
-                audio.src = "../assets/audios/test.mp3"
-                audio.play()*/
             }
         }
+
+        //if (flag) flag = false
+        //else audio.play()
 
         await sleep(1000)
     }

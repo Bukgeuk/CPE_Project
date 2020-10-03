@@ -1,0 +1,30 @@
+.main {
+    padding-top: 60px;
+    height: 100vh;
+}
+
+.btn {
+    padding: 5px 12px 5px 12px;
+}
+
+header {
+    padding-bottom: 50px;
+}
+
+article {
+    margin: 0 auto;
+    width: fit-content;
+}
+
+article > div {
+    padding-bottom: 20px;
+    text-align: center;
+}
+
+article > div > span {
+    font-size: 1.2rem;
+}
+
+article > button {
+    margin-top: 25px;
+}

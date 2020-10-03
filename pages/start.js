@@ -1,8 +1,8 @@
 const { shell, remote, ipcRenderer } = require('electron')
-const fs = require('fs-extra')
 const https = require('https')
 
 let bHaveToUpdate = undefined
+let sLastestVersion = undefined
 
 ipcRenderer.on('data', (event, arg) => {
     if (arg.type === 'update') {
@@ -26,16 +26,20 @@ window.onload = () => {
     if (bHaveToUpdate === undefined) {
         getLastestVersion().then(lastestVersion => {
             bHaveToUpdate = haveToUpdate(version, lastestVersion)
+            sLastestVersion = lastestVersion
 
             if (bHaveToUpdate) {
                 update.src = '../assets/icons/update.png'
+                update.title = '업데이트 필요'
             } else {
                 update.src = '../assets/icons/updated.png'
+                update.title = '업데이트 필요 없음'
             }
 
             ipcRenderer.send('data', {type: 'updateToMainProcess', data: bHaveToUpdate})
         }).catch(err => {
             update.src = '../assets/icons/fail.png'
+            update.title = '네트워크 오류'
         })
     } else if (bHaveToUpdate === true) {
         update.src = '../assets/icons/update.png'
@@ -80,12 +84,7 @@ function getLastestVersion(){
     })
 }
 
-function getCurrentVersion() {
-    const obj = fs.readJsonSync('./version.json')
-    return obj.version
-}
-
-function haveToUpdate(current, lastest){
+function haveToUpdate(current, lastest) {
     let beta = false
 
     if (lastest.indexOf('b') !== -1) return false
@@ -105,4 +104,12 @@ function haveToUpdate(current, lastest){
 
     if (beta) return true
     else return false
+}
+
+function openModal() {
+    if (bHaveToUpdate === undefined) var type = "fail"
+    else if (bHaveToUpdate === false) var type = "updated"
+    else if (bHaveToUpdate === true) var type = "update"
+
+    ipcRenderer.send('modal', {type: type, lastest: sLastestVersion})
 }
