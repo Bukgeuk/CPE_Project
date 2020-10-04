@@ -94,8 +94,8 @@ async function count(list, name) {
             }
         }
 
-        //if (flag) flag = false
-        //else audio.play()
+        if (flag) flag = false
+        else audio.play()
 
         await sleep(1000)
     }
