@@ -94,8 +94,8 @@ async function count(list, name) {
             }
         }
 
-        //if (flag) flag = false
-        //else audio.play()
+        if (flag) flag = false
+        else audio.play()
 
         await sleep(1000)
     }
@@ -126,7 +126,7 @@ function clickNext() {
     win.setResizable(false)
 
     setTimeout(() => {
-        location.href = './result.html'
+        location.href = `./result.html?abstain=${getQueryString().abstain}`
     }, 200)
 
     document.body.style.opacity = '0'

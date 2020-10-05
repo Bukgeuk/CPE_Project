@@ -1,6 +1,6 @@
 {
   "name": "cpe_project",
-  "version": "1.0.0b",
+  "version": "1.0.0",
   "description": "A Class President Election Program",
   "main": "app.js",
   "scripts": {
@@ -25,12 +25,12 @@
   },
   "build": {
     "productName": "학급 정부회장 선거",
-    "appId": "com.electron.cpe",
+    "appId": "com.cpe.app",
     "asar": true,
     "protocols": {
-      "name": "CPEProject",
+      "name": "CPE_Project",
       "schemes": [
-        "cpeproject"
+        "cpe_project"
       ]
     },
     "win": {

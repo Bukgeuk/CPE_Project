@@ -17,6 +17,7 @@ let candidateList = []
 let option = {}
 let count = 0
 let canVote = true
+let abstain = undefined
 const keyList = [
                 '1', '2', '3', '4', '5', '6', '7',
                 '8', '9', 'a', 'b', 'c', 'd', 'e',
@@ -50,6 +51,8 @@ window.onload = () => {
     })
 
     if (option.useAbstain) {
+        abstain = 0
+
         let div = document.createElement('div')
 
         let innerDiv = document.createElement('div')
@@ -152,7 +155,7 @@ function clickNext() {
     win.setTitle("학급 정부회장 선거 - 개표")
 
     setTimeout(() => {
-        location.href = './count.html'
+        location.href = `./count.html?abstain=${abstain}`
     }, 200)
 
     document.body.style.opacity = '0'
@@ -178,6 +181,8 @@ function vote(number) {
 
     if (number !== null)
         candidateList[number].value++
+    else if (number === null)
+        abstain++
     
     count++
     setVoteCountText()

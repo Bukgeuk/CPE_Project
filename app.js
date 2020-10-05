@@ -22,7 +22,7 @@ function createWindow() {
 
     win.setMenu(null)
 
-    //win.webContents.openDevTools()
+    win.webContents.openDevTools()
     
     win.loadFile('pages/start.html')
 
