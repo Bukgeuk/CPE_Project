@@ -1,5 +1,4 @@
 const { remote, ipcRenderer, clipboard, nativeImage } = require('electron')
-const fs = require('fs-extra')
 window.$ = window.jQuery = require('jquery')
 window.toastr = require('toastr')
 window.html2canvas = require('html2canvas')
@@ -52,6 +51,7 @@ window.onload = () => {
         document.getElementById('2ndPlace').innerText = secondPlace.join(', ')
 
     let target = document.getElementById('scrollView')
+    let _temp = 0
 
     for (let i = 0; i < candidateList.length; i++) {
         let div = document.createElement('div')
@@ -73,6 +73,37 @@ window.onload = () => {
         let span2 = document.createElement('span')
         span2.classList.add('text', 'medium-text')
         span2.innerText = `${candidateList[i].value}표`
+
+        div.appendChild(innerDiv)
+        div.appendChild(span2)
+
+        target.appendChild(div)
+
+        _temp = i + 1
+    }
+
+    let abstain = getQueryString().abstain
+    if (abstain !== "undefined") {
+        let div = document.createElement('div')
+
+        let innerDiv = document.createElement('div')
+        innerDiv.classList.add('inline-block')
+
+        let span = document.createElement('span')
+        span.classList.add('medium-text', 'text')
+        span.innerText = `${_temp}번`
+        span.style.visibility = 'hidden'
+
+        let p = document.createElement('p')
+        p.classList.add('text', 'light-text')
+        p.innerText = "기권"
+
+        innerDiv.appendChild(span)
+        innerDiv.appendChild(p)
+
+        let span2 = document.createElement('span')
+        span2.classList.add('text', 'medium-text')
+        span2.innerText = `${abstain}표`
 
         div.appendChild(innerDiv)
         div.appendChild(span2)

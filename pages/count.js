@@ -126,7 +126,7 @@ function clickNext() {
     win.setResizable(false)
 
     setTimeout(() => {
-        location.href = './result.html'
+        location.href = `./result.html?abstain=${getQueryString().abstain}`
     }, 200)
 
     document.body.style.opacity = '0'

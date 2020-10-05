@@ -202,7 +202,12 @@ window.onload = function() {
     }
 }
 
-function addInput() {
+async function addInput() {
+    if (next === 1000) {
+        toastr.warning("", "그....그만둬...!!")
+        return;
+    }
+
     let target = document.getElementById('scrollView')
     
     document.getElementById('addInputDiv').remove()
