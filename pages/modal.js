@@ -26,5 +26,5 @@ window.onload = () => {
 }
 
 function goToDownload() {
-    shell.openExternal("https://github.com/Bukgeuk/CPE_Project/releases")
+    shell.openExternal("https://github.com/Bukgeuk/CPE_Project/releases/latest")
 }

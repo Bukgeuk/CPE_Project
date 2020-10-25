@@ -1,6 +1,6 @@
 {
   "name": "cpe_project",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A Class President Election Program",
   "main": "app.js",
   "scripts": {
