@@ -5,6 +5,7 @@ const path = require('path')
 let candidateList = []
 let option = {}
 let haveToUpdate = undefined
+let voteTitle = ''
 
 function createWindow() {
     let win = new BrowserWindow({
@@ -63,7 +64,12 @@ ipcMain.on('data', (event, arg) => {
         case 'updateToRendererProcess':
             event.sender.send('data', {type: 'update', data: haveToUpdate})
             break
-
+        case 'titleToMainProcess':
+            voteTitle = arg.data
+            break
+        case 'titleToRendererProcess':
+            event.sender.send('data', {type: 'title', data: voteTitle})
+            break
     }
 })
 

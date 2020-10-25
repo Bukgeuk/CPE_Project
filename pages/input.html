@@ -20,6 +20,10 @@
         </section>
         <aside class="rounded-lg" oncopy="return false" oncut="return false" onpaste="return false">
             <p class="text medium-text">설정</p>
+            <div id="title">
+                <span class="text light-text">제목</span>
+                <input class="focus:outline-none focus:shadow-outline rounded-lg px-3 appearance-none leading-normal input border text light-text" type="text" id="inputTitle" placeholder="투표 제목을 입력해주세요">
+            </div>
             <div id="headcount">
                 <span class="text light-text">투표자</span>
                 <input class="focus:outline-none focus:shadow-outline rounded-lg px-3 appearance-none leading-normal input border text light-text" type="text" id="inputHeadCount" value="20" onKeyPress="return checkNum(event)">

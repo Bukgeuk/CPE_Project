@@ -15,16 +15,22 @@ toastr.options = {
 }
 
 let candidateList = []
+let voteTitle = ''
 
 ipcRenderer.on('data', (event, arg) => {
     if (arg.type === 'list')
-            candidateList = arg.data
+        candidateList = arg.data
+    else if (arg.type === 'title')
+        voteTitle = arg.data
 })
 
 ipcRenderer.send('data', {type: 'listToRendererProcess'})
+ipcRenderer.send('data', {type: 'titleToRendererProcess'})
 
 window.onload = () => {
     document.body.style.opacity = '1'
+
+    document.querySelector('#scrollView > p').innerText = voteTitle
 
     let valueArr = []
 
@@ -110,6 +116,11 @@ window.onload = () => {
 
         target.appendChild(div)
     }
+
+    let audio = new Audio()
+    audio.src = "../assets/audios/clap.wav"
+    audio.volume = 0.4
+    audio.play()
 }
 
 function clickCopy() { // 복사
