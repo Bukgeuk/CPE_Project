@@ -10,7 +10,7 @@ ipcRenderer.on('data', (event, arg) => {
 
 ipcRenderer.send('data', ({type: 'listToRendererProcess'}))
 
-window.onload = () => {
+window.onload = async () => {
     document.body.style.opacity = '1'
 
     let target = document.getElementById('scrollView')
@@ -49,7 +49,46 @@ window.onload = () => {
         target.appendChild(div)
     }
 
+    await effect()
     count()
+}
+
+function effect() {
+    return new Promise(async (resolve, reject) => {
+        await sleep(10)
+
+        for (let i = 3; i >= 1; i--) {
+            let obj = document.getElementById(`count${i}`)
+            obj.style.display = 'inherit'
+    
+            for (let j = 25; j >= 20; j -= 0.05) {
+                obj.style.fontSize = `${j}vw`
+                await sleep(1)
+            }
+    
+            await sleep(500)
+    
+            for (let j = 1; j >= 0; j -= 0.01) {
+                obj.style.opacity = j
+    
+                await sleep(1)
+            }
+    
+            await sleep(200)
+    
+            obj.style.display = 'none'
+        }
+
+        let background = document.getElementById('count')
+        for (let i = 1; i >= 0; i -= 0.01) {
+            background.style.opacity = i
+
+            await sleep(1)
+        }
+        background.style.display = 'none'
+
+        resolve()
+    })
 }
 
 async function count(list, name) {
@@ -66,7 +105,7 @@ async function count(list, name) {
     pointArr.sort((a, b) => a - b)
 
     let audio = new Audio()
-    audio.src = "../assets/audios/test.wav"
+    audio.src = "../assets/audios/count.wav"
                 
     let flag = true
 

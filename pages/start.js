@@ -107,6 +107,8 @@ function haveToUpdate(current, lastest) {
 }
 
 function openModal() {
+    if (document.getElementById("update").title === "데이터 가져오는 중") return;
+
     if (bHaveToUpdate === undefined) var type = "fail"
     else if (bHaveToUpdate === false) var type = "updated"
     else if (bHaveToUpdate === true) var type = "update"

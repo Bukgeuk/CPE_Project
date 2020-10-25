@@ -114,6 +114,11 @@ aside > div > div {
     display: inline-block;
 }
 
+#title > input {
+    width: 350px;
+    margin-left: 10px;
+}
+
 /*footer {
     position: absolute;
     bottom: 0;

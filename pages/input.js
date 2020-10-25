@@ -29,6 +29,10 @@ let focusEventHandlers = []
 let blurEventHandlers = []
 let option = {}
 
+let d = new Date()
+const year = d.getFullYear()
+const month = d.getMonth()
+
 ipcRenderer.on('data', (event, arg) => {
     switch(arg.type) {
         case 'list':
@@ -66,6 +70,8 @@ document.addEventListener('keydown', (e) => {
 
 window.onload = function() {
     document.body.style.opacity = '1'
+
+    document.getElementById('inputTitle').value = `${year}학년도 ${month > 1 && month < 8 ? '1' : '2'}학기 학급 정부회장 선거`
 
     let target = document.getElementById('scrollView')
 
@@ -377,6 +383,7 @@ function clickNext() {
 
     ipcRenderer.send('data', {type: 'listToMainProcess', data: candidateList})
     ipcRenderer.send('data', {type: 'optionToMainProcess', data: option})
+    ipcRenderer.send('data', {type: 'titleToMainProcess', data: document.getElementById('inputTitle').value})
 
     win = remote.getCurrentWindow()
 

@@ -5,8 +5,7 @@ body > header {
 
 #scrollView > p {
     font-size: 1.8rem;
-    padding-top: 40px;
-    padding-bottom: 70px;
+    padding: 40px 30px 70px 30px;
 }
 
 #ranking {
@@ -27,8 +26,12 @@ body > header {
     padding-bottom: 40px;
 }
 
-#scrollView > div, #ranking > div {
+#ranking > div {
     padding: 20px 50px 20px 50px;
+}
+
+#scrollView > div {
+    padding: 20px 90px 20px 90px;
 }
 
 #ranking > div > div {
@@ -64,9 +67,10 @@ body > header {
 }
 
 #scrollView > div > span {
-    display: inline-block;
-    margin-left: 50px;
+    display: block;
+    /*margin-left: 100px;*/
     font-size: 1.6rem;
+    float: right;
 }
 
 footer {

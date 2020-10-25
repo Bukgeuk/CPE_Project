@@ -54,3 +54,19 @@ section {
     height: calc(89vh - 89px);
     overflow: auto;
 }
+
+.count {
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    line-height: 100vh;
+    text-align: center;
+    font-size: 35vw;
+    display: none;
+}
+
+#count {
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.2);
+}
